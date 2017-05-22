@@ -4,11 +4,11 @@
 	<parameter name="username" value="kamaz" />
 	<parameter name="password" value="kamaz" />
 	<parameter name="role" value="ПАО «КАМАЗ»" />
-	<test name = "LoginTests">
+	<test name = "CreateOTTSTests">
 		<classes>
-			<class name="ru.fors.tests.LoginTests">
+			<class name="ru.fors.tests.CreateOTTSTests">
 				<methods>
-					<include name="userLoginTest" />
+					<include name="userCreateElectronicOTTSTest" />
 				</methods>
 			</class>
 		</classes>

@@ -122,7 +122,7 @@
 				<site.url>${url}</site.url>
 				<imp.wait>${wait.seconds}</imp.wait>
 				<browser.name>chrome</browser.name>
-				<suites>test_env</suites>
+				<suites>debug</suites>
 			</properties>
             <activation>
 				<activeByDefault>true</activeByDefault>

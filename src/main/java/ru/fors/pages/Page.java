@@ -15,12 +15,14 @@ import ru.fors.utils.PropertyLoader;
 
 public class Page {
 
-	protected WebDriver driver;
-	protected WebDriverWait wait;
+	WebDriver driver;
+	WebDriverWait wait;
+	protected WebDriverWait wait2;
 
 	public Page(WebDriver driver) {
 		this.driver = driver;
 		wait = new WebDriverWait(driver, Long.parseLong(PropertyLoader.loadProperty("wait")));
+		wait2 = new WebDriverWait(driver, 2);
 	}
 
 	Date currentDate = new Date(System.currentTimeMillis());
@@ -52,7 +54,7 @@ public class Page {
 		int count =0;
 		while (count <5) {
 			try {
-				wait.until(ExpectedConditions.elementToBeClickable(element));
+				wait2.until(ExpectedConditions.elementToBeClickable(element));
 				driver.findElement(element).click();
 				break;
 			} catch (Exception e) {
@@ -75,13 +77,14 @@ public class Page {
 		while (count < 5) {
 			try {
 				click(element);
-				wait.until(ExpectedConditions.elementToBeClickable(element1));
+				wait2.until(ExpectedConditions.elementToBeClickable(element1));
 				click(element1);
-				wait.until(ExpectedConditions.elementToBeClickable(element2));
+				wait2.until(ExpectedConditions.elementToBeClickable(element2));
 				click(element2);
 				break;
 			} catch (Exception e) {
 				System.out.println("Count: " + count + " click exception" );
+                System.out.println(e);
 				count = count + 1;
 			}
 		}
@@ -92,7 +95,7 @@ public class Page {
 		while (count < 5) {
 			try {
 				click(element);
-				wait.until(ExpectedConditions.elementToBeClickable(element1));
+				wait2.until(ExpectedConditions.elementToBeClickable(element1));
 				click(element1);
 				break;
 			} catch (Exception e) {
