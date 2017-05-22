@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AcceptanceTests">
+	<parameter name="username" value="kamaz" />
+	<parameter name="password" value="kamaz" />
+	<parameter name="role" value="ПАО «КАМАЗ»" />
+	<test name = "LoginTests">
+		<classes>
+			<class name="ru.fors.tests.LoginTests">
+				<methods>
+					<include name="userLoginTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
