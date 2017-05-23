@@ -121,7 +121,7 @@
 			<properties>
 				<site.url>${url}</site.url>
 				<imp.wait>${wait.seconds}</imp.wait>
-				<browser.name>chrome</browser.name>
+				<browser.name>firefox</browser.name>
 				<suites>debug</suites>
 			</properties>
             <activation>
@@ -133,7 +133,7 @@
 			<properties>
 				<site.url>${url}</site.url>
 				<imp.wait>${wait.seconds}</imp.wait>
-				<browser.name>chrome</browser.name>
+				<browser.name>firefox</browser.name>
 				<suites>prod_env</suites>
 			</properties>
 		</profile>

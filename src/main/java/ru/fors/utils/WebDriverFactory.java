@@ -3,7 +3,10 @@ package ru.fors.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverFactory {
 	
@@ -20,7 +23,13 @@ public class WebDriverFactory {
 			webDriver = new ChromeDriver();
 
 		} else if (FIREFOX.equals(browserName)) {
-			webDriver = new FirefoxDriver();
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			FirefoxProfile profile = new FirefoxProfile();
+			profile.setAcceptUntrustedCertificates(true);
+			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+			capabilities.setCapability(FirefoxDriver.MARIONETTE, false);
+			webDriver = new FirefoxDriver(capabilities);
 
 		} else if (INTERNET_EXPLORER.equals(browserName)) {
 			webDriver = new InternetExplorerDriver();

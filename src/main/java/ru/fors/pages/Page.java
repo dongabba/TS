@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,6 +19,9 @@ public class Page {
 	WebDriver driver;
 	WebDriverWait wait;
 	protected WebDriverWait wait2;
+
+	public By select2SearchField = By.className("select2-search__field");
+	public By select2ResultField = By.className("select2-results__options");
 
 	public Page(WebDriver driver) {
 		this.driver = driver;
@@ -103,6 +107,15 @@ public class Page {
 				count = count + 1;
 			}
 		}
+	}
+
+	public void userSelectFromSelectList(By element, String value){
+		click(element);
+		wait.until(ExpectedConditions.elementToBeClickable(select2SearchField));
+		type(select2SearchField, value);
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(select2ResultField, value));
+		Actions actions = new Actions(driver);
+		actions.click(driver.findElement(By.className("select2-results__options"))).perform();
 	}
 
 }
