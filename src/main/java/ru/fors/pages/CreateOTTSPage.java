@@ -184,9 +184,9 @@ public class CreateOTTSPage extends Page{
         type(vin12, "2");
         type(vin13, "3");
         type(vin14, "4");
-        type(vin15, "5");
-        type(vin16, "6");
-        type(vin17, "7");
+        type(vin15, "?");
+        type(vin16, "?");
+        type(vin17, "?");
     }
 
     @Step("Пользователь сохраняет ОТТС")

@@ -22,11 +22,12 @@ public class Page {
 
 	public By select2SearchField = By.className("select2-search__field");
 	public By select2ResultField = By.className("select2-results__options");
+	public By select2clearButton = By.className("select2-selection__clear");
 
 	public Page(WebDriver driver) {
 		this.driver = driver;
 		wait = new WebDriverWait(driver, Long.parseLong(PropertyLoader.loadProperty("wait")));
-		wait2 = new WebDriverWait(driver, 2);
+		wait2 = new WebDriverWait(driver, 5);
 	}
 
 	Date currentDate = new Date(System.currentTimeMillis());
@@ -110,12 +111,24 @@ public class Page {
 	}
 
 	public void userSelectFromSelectList(By element, String value){
-		click(element);
-		wait.until(ExpectedConditions.elementToBeClickable(select2SearchField));
-		type(select2SearchField, value);
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(select2ResultField, value));
-		Actions actions = new Actions(driver);
-		actions.click(driver.findElement(By.className("select2-results__options"))).perform();
+		boolean count = true;
+		while(count){
+			try{
+				count = false;
+				click(element);
+				wait.until(ExpectedConditions.elementToBeClickable(select2SearchField));
+				type(select2SearchField, value);
+				Thread.sleep(2000);
+				wait.until(ExpectedConditions.textToBePresentInElementLocated(select2ResultField, value));
+				Actions actions = new Actions(driver);
+				actions.click(driver.findElement(By.className("select2-results__options"))).perform();
+				wait2.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
+			} catch (Exception e){
+				count = true;
+
+			}
+		}
+
 	}
 
 }
