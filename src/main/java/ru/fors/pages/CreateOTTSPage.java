@@ -13,7 +13,7 @@ public class CreateOTTSPage extends Page{
     CreateOTTSPage(WebDriver driver) {
         super(driver);
     }
-
+    //===обязательные поля===
     private By docNumberFld = By.xpath("//input[@name=\"commonProperties:numberVersionContainer:number\"]");
     private By dateCreateFld = By.xpath("//input[@name=\"commonProperties:registrationDate\"]");
     private By dateRegistryEnter = By.xpath("//input[@name=\"commonProperties:registryEntryDate\"]");
@@ -23,13 +23,13 @@ public class CreateOTTSPage extends Page{
     private By commercialNameField = By.xpath("//input[@name=\"commonProperties:commercialNamesContainer:commercialNames:repeater:0:textField\"]");
     private By typeField = By.xpath("//input[@name=\"commonProperties:modelNames:repeater:0:textField\"]");
     private By modificationField = By.xpath("//input[@name=\"commonProperties:modificationsContainer:modifications:repeater:0:modificationName\"]");
-    private By category018selectField = By.cssSelector("div[wicketpath=\"form_commonProperties_technicalCategory_repeater_0\"]>div:nth-of-type(1)>div>span>span");
+    private By category018selectField = By.cssSelector("div[wicketpath=\"form_commonProperties_technicalCategory_repeater_0\"]>div:nth-of-type(1)>div>div>span>span>span");
     private By ecologyClassField = By.cssSelector("div[wicketpath=\"form_commonProperties_ecologicalClassContainer_ecologicalClass_repeater_0\"]>div:nth-of-type(1)>div>span>span>span");
     private By sertOrgField = By.cssSelector("div[wicketpath=\"form_commonProperties_certificateAuthority_organizationContainer\"]>div:nth-of-type(2)>div>div>span>span>span");
     private By isManufacturerDelegateIsMissingChkBox = By.cssSelector("input[name=\"manufacturerDelegates:isMissing\"]+span");
     private By isManufacturerAssembliesIsMissingChkBox = By.cssSelector("input[name=\"manufacturerAssemblies:isMissing\"]+span");
     private By isAssemblyKitsSuppliersIsMissingChkBox = By.cssSelector("input[name=\"assemblyKitsSuppliers:isMissing\"]+span");
-    private By baseVehicleField = By.cssSelector("input[name=\"approvalBaseVehicle:infoContainer:vehicleType\"]");
+    private By baseVehicleField = By.cssSelector("input[name=\"approvalBaseVehicles:repeaterContainer:repeater:0:vehicleType\"]");
     private By vehicleWeightSelect = By.cssSelector("div[wicketpath=\"form_vehicleWeight_repeater_0\"]>div:nth-of-type(2)>div>div>span>span>span");
     private By forwardSuspensionDescription = By.cssSelector("textarea[name=\"vehicleGeneralCharacteristics:suspensions:repeater:0:fullSuspensionContainer:forwardSuspensionDescription\"]");
     private By forwardSuspensionDescription1 = By.cssSelector("textarea[wicketpath=\"form_vehicleGeneralCharacteristics_suspensions_repeater_0_fullSuspensionContainer_forwardSuspensionDescription\"]");
@@ -55,6 +55,15 @@ public class CreateOTTSPage extends Page{
     private By saveButton = By.cssSelector("button[name=\"save\"]");
     private By deleteButton = By.cssSelector("button[wicketpath=\"form_delete\"]");
     private By statusNameField = By.cssSelector("span[wicketpath=\"form_header_status.name\"]");
+
+    //===все поля====
+    private By versionField = By.cssSelector("input[name=\"commonProperties:numberVersionContainer:version\"]");
+    private By validDateToField = By.cssSelector("input[name=\"commonProperties:validTo\"]");
+    private By addcommercialNameFieldButton = By.cssSelector("button[wicketpath=\"form_commonProperties_commercialNamesContainer_commercialNames_repeater_0_btnAdd\"]");
+    private By applicantOrganizationSelect = By.cssSelector("div[wicketpath=\"form_applicantContainer_applicant_organizationContainer\"]>div:nth-of-type(4)>div>div>span>span>span"); //заявитель
+    private By manufacturerOrganizationSelect = By.cssSelector("div[wicketpath=\"form_manufacturer_organizationContainer\"]>div:nth-of-type(4)>div>div>span>span>span"); //изготовитель
+    private By manufacturerAssembliesAdd = By.cssSelector("a[wicketpath=\"form_manufacturerAssemblies_add\"]"); //добавить сборочный завод
+    private By manufacturerAssembliesSelect = By.cssSelector("div[wicketpath=\"form_manufacturerAssemblies_repeater_0_organization_organizationContainer\"]>div:nth-of-type(4)>div>div>span>span>span"); //сборочный завод
 
 
     @Step("Проверяем открылась ли страница создания ОТТС")
@@ -198,5 +207,16 @@ public class CreateOTTSPage extends Page{
     @Step("Пользователь проверяет что статус ОТТС изменился на проект")
     public String userCheckOTTSStatus(){
         return getElementText(statusNameField);
+    }
+
+    //=== заполняем все поля ===
+    @Step("Пользователь вводит версию")
+    public void userTypeVersion(){
+        type(versionField, "P2");
+    }
+
+    @Step("Пользователь указывает срок действия по")
+    public void userTypevalidDateTo(){
+        type(validDateToField, "31.12.2020");
     }
 }

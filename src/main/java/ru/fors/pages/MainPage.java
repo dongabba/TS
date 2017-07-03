@@ -16,7 +16,7 @@ public class MainPage extends Page {
 	private By userInfoDropDown = By.xpath("//*[@id='main']//i[2]");
 	private By logoutLink = By.linkText("Выход");
 	private By registryOTTS = By.linkText("Реестр ОТТС");
-	private By registryLink = By.linkText("Реестры");
+	private By registryLink = By.cssSelector(".icon-menu.registry");
 	private By registryEPTS = By.linkText("Реестр электронных паспортов");
 
 
