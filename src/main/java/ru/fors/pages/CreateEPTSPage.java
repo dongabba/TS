@@ -26,14 +26,17 @@ public class CreateEPTSPage extends Page{
     private By vin17 = By.cssSelector("input[name=\"identificationNumbers:vin:repeater:16:symbol\"]");
     private By engineNumb = By.cssSelector("input[name=\"identificationNumbers:engineNumbers:repeaterContainer:repeater:0:textField\"]");
     private By noShassi = By.cssSelector("input[name=\"identificationNumbers:chassisNumberMissing\"]+span");
+    private By shassiNumb = By.cssSelector("input[name=\"identificationNumbers:chassisNumber\"]");
     private By cabineNumb = By.cssSelector("input[name=\"identificationNumbers:bodyNumber\"]");
     private By noEmergencyServicesNumber = By.cssSelector("input[name=\"identificationNumbers:emergencyServicesNumberMissing\"]+span");
     private By manufactoryYearField = By.cssSelector("input[name=\"identificationNumbers:manufactoryYear\"]");
     private By category1968SelectFld = By.cssSelector("div[wicketpath=\"form_passportVehicle\"]>div:nth-of-type(1)>div:nth-of-type(2)>div:nth-of-type(2)>div>span>span>span");
     private By vehicleWeightFld = By.cssSelector("input[name=\"passportVehicle:vehicleWeightList:repeater:0:axleWeightValues:repeater:0:value\"]");
     private By placeOfEngineNumb = By.cssSelector("div[wicketpath=\"form_vehicleMarkingContainer_vehicleMarking_infoContainer_engineNumberContainer\"]>div:nth-of-type(1)>div>div>span>span>span");
-    private By noSatelliteNavigationChkBox = By.cssSelector("input[name=\"managementInformation:satelliteNavigationEquipmentIdContainer:satelliteNavigationEquipmentId\"]+span");
-    private By noTachographIdChkBox = By.cssSelector("input[name=\"managementInformation:tachographIdContainer:tachographId\"]+span");
+    private By noSatelliteNavigationChkBox = By.cssSelector("input[name=\"managementInformation:satelliteNavigationEquipmentIdAbsent\"]+span");
+    private By noTachographIdChkBox = By.cssSelector("input[name=\"managementInformation:tachographIdAbsent\"]+span");
+    private By saveAndSignBtn = By.cssSelector("button[name=\"saveAndSign\"]");
+    private By saveEPTSBtn = By.cssSelector("input[value=\"Подтвердить и создать электронный паспорт\"]");
 
     private int generateVinNumb(){
         Random rnd = new Random();
@@ -43,7 +46,7 @@ public class CreateEPTSPage extends Page{
 
     public void userTypeVIN(){
         type(vin6, String.valueOf(generateVinNumb()));
-        type(vin7, String.valueOf(generateVinNumb()));
+        //type(vin7, String.valueOf(generateVinNumb()));
         type(vin8, String.valueOf(generateVinNumb()));
         type(vin9, String.valueOf(generateVinNumb()));
         type(vin10, String.valueOf(generateVinNumb()));
@@ -66,6 +69,10 @@ public class CreateEPTSPage extends Page{
         click(noShassi);
     }
 
+    public void userTypeShassiNumb(){
+        type(shassiNumb, "67979795954");
+    }
+
     public void userTypeCabineNumb(){
         Random rnd = new Random();
         type(cabineNumb, "JTJHK"+String.valueOf(rnd.nextInt(89)+10)+"U"+String.valueOf(rnd.nextInt(899999999)+100000000));
@@ -80,7 +87,7 @@ public class CreateEPTSPage extends Page{
     }
 
     public void userSelectCategory1968(){
-        userSelectFromSelectList(category1968SelectFld, "категория C");
+        userSelectFromSelectList2(category1968SelectFld, "C");
     }
 
     public void userTypeVehicleWeight(){
@@ -89,7 +96,7 @@ public class CreateEPTSPage extends Page{
     }
 
     public void userSelectPlaceOfEngineNumb(){
-        userSelectFromSelectList(placeOfEngineNumb, "на блоке цилиндров двигателя");
+        userSelectFromSelectList3(placeOfEngineNumb, "на блоке цилиндров двигателя");
     }
 
     public void userNoSatelliteNavigationChkBox(){
@@ -98,6 +105,14 @@ public class CreateEPTSPage extends Page{
 
     public void userNoTachographIdChkBox(){
         click(noTachographIdChkBox);
+    }
+
+    public void userClickSaveAndSignBtn(){
+        click(saveAndSignBtn);
+    }
+
+    public void userClickSaveEPTSBtn(){
+        click(saveEPTSBtn);
     }
 
 }

@@ -32,7 +32,7 @@ public class RegistryEPTSPage extends Page{
         wait.until(ExpectedConditions.elementToBeClickable(eptsBtn));
         click(eptsBtn);
         wait.until(ExpectedConditions.presenceOfElementLocated(typeDocWindow));
-        userSelectFromSelectList(ottsNumberField, "ТС RU E-RU.МТ01.00005");
+        userSelectFromSelectList(ottsNumberField, "ТС RU Е-RU.МТ01.00013");
         wait.until(ExpectedConditions.visibilityOfElementLocated(ottsDateFromField));
         click(goToCreateEptsBtn);
         return new CreateEPTSPage(driver);

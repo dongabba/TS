@@ -21,7 +21,10 @@ public class Page {
 	protected WebDriverWait wait2;
 
 	public By select2SearchField = By.className("select2-search__field");
+	public By select2SearchField2 = By.cssSelector(".select2-dropdown.select2-dropdown--above>span>input");
 	public By select2ResultField = By.className("select2-results__options");
+	public By classC = By.xpath(".//li[text()='C']");
+	public By engeneeNumb = By.xpath(".//li[text()='Место расположения номера двигателя в шаблоне']");
 
 
 	public Page(WebDriver driver) {
@@ -122,6 +125,50 @@ public class Page {
 				Actions actions = new Actions(driver);
 				actions.click(driver.findElement(By.className("select2-results__options"))).perform();
 				wait2.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
+				break;
+			} catch (Exception e){
+				count = count+1;
+
+			}
+		}
+
+	}
+
+	public void userSelectFromSelectList2(By element, String value){
+		int count = 0;
+		while(count<5){
+			try{
+				click(element);
+				wait.until(ExpectedConditions.elementToBeClickable(classC));
+				click(classC);
+				//type(select2SearchField2, value);
+				Thread.sleep(2000);
+				//wait.until(ExpectedConditions.textToBePresentInElementLocated(select2ResultField, value));
+				//Actions actions = new Actions(driver);
+				//actions.click(driver.findElement(By.className("select2-results__options"))).perform();
+				//wait2.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
+				break;
+			} catch (Exception e){
+				count = count+1;
+
+			}
+		}
+
+	}
+
+	public void userSelectFromSelectList3(By element, String value){
+		int count = 0;
+		while(count<5){
+			try{
+				click(element);
+				wait.until(ExpectedConditions.elementToBeClickable(engeneeNumb));
+				click(engeneeNumb);
+				//type(select2SearchField2, value);
+				Thread.sleep(2000);
+				//wait.until(ExpectedConditions.textToBePresentInElementLocated(select2ResultField, value));
+				//Actions actions = new Actions(driver);
+				//actions.click(driver.findElement(By.className("select2-results__options"))).perform();
+				//wait2.until(ExpectedConditions.textToBePresentInElementLocated(element, value));
 				break;
 			} catch (Exception e){
 				count = count+1;

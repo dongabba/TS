@@ -73,7 +73,7 @@ public class CreateOTTSPage extends Page{
 
     @Step("Пользователь вводит номер документа")
     public void userTypeDocNumber(){
-        type(docNumberFld, "23052017_01");
+        type(docNumberFld, "ТС RU E-RU.МТ01.00011");
     }
 
     @Step("Пользователь вводит дату оформления")

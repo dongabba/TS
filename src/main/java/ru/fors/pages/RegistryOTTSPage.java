@@ -17,7 +17,7 @@ public class RegistryOTTSPage extends Page {
         super(driver);
     }
 
-    private By pageTitle = By.xpath("//*[@id='content']/div//li[2]/span");
+    private By pageTitle = By.xpath("//*[@id='content']/div//li/span");
     private By getActionBtn = By.xpath(".//div[@class='btn-group']/button/i");
     private By createDocBtn = By.xpath("//li[@wicketpath=\"buttonsPanel_createButtonsContainer\"]/button");
     private By ottsBtn = By.linkText("ОТТС");
@@ -40,7 +40,7 @@ public class RegistryOTTSPage extends Page {
         wait.until(ExpectedConditions.elementToBeClickable(ottsBtn));
         click(ottsBtn);
         wait.until(ExpectedConditions.presenceOfElementLocated(typeDocWindow));
-        click(electronicDocType);
+        //click(electronicDocType);
         click(createDocBtn2);
         return new CreateOTTSPage(driver);
     }

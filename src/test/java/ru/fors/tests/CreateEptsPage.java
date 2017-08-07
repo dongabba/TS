@@ -35,17 +35,20 @@ public class CreateEptsPage extends TestBase{
         RegistryEPTSPage registryEPTSPage = mainPage.userGoToRegistryEPTSPage();
         //assertTrue("Не совпадают роли пользователей", registryOTTSPage.isRegistryOTTSPageLoaded().contains("Реестр ОТТС (ОТШ)"));
         CreateEPTSPage createEPTSPage = registryEPTSPage.userOpenCreateEPTSPage();
-        createEPTSPage.userTypeVIN();
+        //createEPTSPage.userTypeVIN();
         createEPTSPage.userTypeEngineNumber();
-        createEPTSPage.userCheckNoShassi();
+        createEPTSPage.userTypeShassiNumb();
+        //createEPTSPage.userCheckNoShassi();
         createEPTSPage.userTypeCabineNumb();
         createEPTSPage.userCheckNoEmergencyServicesNumber();
         createEPTSPage.userTypeManufactoryYear();
         createEPTSPage.userSelectCategory1968();
-        createEPTSPage.userTypeVehicleWeight();
+        //createEPTSPage.userTypeVehicleWeight();
         createEPTSPage.userSelectPlaceOfEngineNumb();
         createEPTSPage.userNoSatelliteNavigationChkBox();
         createEPTSPage.userNoTachographIdChkBox();
-        Thread.sleep(5000);
+        createEPTSPage.userClickSaveAndSignBtn();
+        createEPTSPage.userClickSaveEPTSBtn();
+        Thread.sleep(30000);
     }
 }
