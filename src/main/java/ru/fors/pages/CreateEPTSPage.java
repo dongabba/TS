@@ -2,7 +2,11 @@ package ru.fors.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import ru.fors.utils.FileWorker;
 
+import java.io.FileWriter;
 import java.util.Random;
 
 /**
@@ -37,7 +41,9 @@ public class CreateEPTSPage extends Page{
     private By noTachographIdChkBox = By.cssSelector("input[name=\"managementInformation:tachographIdAbsent\"]+span");
     private By saveAndSignBtn = By.cssSelector("button[name=\"saveAndSign\"]");
     private By saveEPTSBtn = By.cssSelector("input[value=\"Подтвердить и создать электронный паспорт\"]");
-
+    private By eptsNumber = By.cssSelector("div[wicketpath=\"form_number\"]");
+    private By returnToRegistryBtn = By.cssSelector("button[wicketpath=\"form_fixedPanel_close\"]");
+    private By searchBtn = By.cssSelector("button[name=\"search\"]");
     private int generateVinNumb(){
         Random rnd = new Random();
         return rnd.nextInt(9);
@@ -45,11 +51,11 @@ public class CreateEPTSPage extends Page{
     }
 
     public void userTypeVIN(){
-        type(vin6, String.valueOf(generateVinNumb()));
+        //type(vin6, String.valueOf(generateVinNumb()));
         //type(vin7, String.valueOf(generateVinNumb()));
-        type(vin8, String.valueOf(generateVinNumb()));
-        type(vin9, String.valueOf(generateVinNumb()));
-        type(vin10, String.valueOf(generateVinNumb()));
+        //type(vin8, String.valueOf(generateVinNumb()));
+        //type(vin9, String.valueOf(generateVinNumb()));
+        //type(vin10, String.valueOf(generateVinNumb()));
         type(vin11, String.valueOf(generateVinNumb()));
         type(vin12, String.valueOf(generateVinNumb()));
         type(vin13, String.valueOf(generateVinNumb()));
@@ -113,6 +119,16 @@ public class CreateEPTSPage extends Page{
 
     public void userClickSaveEPTSBtn(){
         click(saveEPTSBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(returnToRegistryBtn));
+    }
+
+    public void getEptsNumberAndWriteToFile(){
+        FileWorker.write("epts.txt", getElementText(eptsNumber));
+    }
+
+    public void userGoToRegistry(){
+        click(returnToRegistryBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(searchBtn));
     }
 
 }

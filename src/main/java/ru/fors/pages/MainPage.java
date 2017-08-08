@@ -18,6 +18,8 @@ public class MainPage extends Page {
 	private By registryOTTS = By.linkText("Реестр ОТТС");
 	private By registryLink = By.cssSelector(".icon-menu.registry");
 	private By registryEPTS = By.linkText("Реестр электронных паспортов");
+	private By requestLink = By.cssSelector(".icon-menu.request");
+	private By registryRequestLnk = By.linkText("Заявление о внесении сведений о регистрационных действиях");
 
 
     @Step("Проверяем открылась ли страница")
@@ -52,5 +54,11 @@ public class MainPage extends Page {
 		wait.until(ExpectedConditions.elementToBeClickable(registryEPTS));
 		click(registryEPTS);
 		return new RegistryEPTSPage(driver);
+	}
+
+	public void userGoToRegistryRequestPage(){
+		click(requestLink);
+		wait.until(ExpectedConditions.elementToBeClickable(registryRequestLnk));
+		click(registryRequestLnk);
 	}
 }
