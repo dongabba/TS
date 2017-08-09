@@ -41,8 +41,8 @@ public class RegistryEPTSPage extends Page{
     //===Создание регистрационного действия===
     private By createRequestLnk = By.linkText("Подать заявление");
     private By createRequestBtn = By.name("create");
-    private By choiseRegisrtyAction = By.xpath("//div[@wicketpath=\"form_listViewContainer\"]/div/div/div[1]/div[2]/div/div//span[@class=\"select2-selection__arrow\"]");
-    private By region = By.xpath("//div[@wicketpath=\"form_listViewContainer\"]/div/div/div[1]/div[4]/div/div//span[@class=\"select2-selection__arrow\"]");
+    private By choiseRegisrtyAction = By.xpath(".//div[@class='panel-remove-in-title']/div[2]/div/div/span/span[1]/span");
+    private By region = By.xpath(".//div[@class='panel-remove-in-title']/div[4]/div/div/span/span[1]/span");
 
     @Step("Пользователь открывает страницу создания ЭП")
     public CreateEPTSPage userOpenCreateEPTSPage(){
@@ -53,7 +53,7 @@ public class RegistryEPTSPage extends Page{
         wait.until(ExpectedConditions.elementToBeClickable(eptsBtn));
         click(eptsBtn);
         wait.until(ExpectedConditions.presenceOfElementLocated(typeDocWindow));
-        userSelectFromSelectList(ottsNumberField, "ТС RU Е-RU.НТ01.00029");
+        userSelectFromSelectList(ottsNumberField, "ТС RU Е-RU.НТ01.00034");
         wait.until(ExpectedConditions.visibilityOfElementLocated(ottsDateFromField));
         click(goToCreateEptsBtn);
         return new CreateEPTSPage(driver);
@@ -76,13 +76,21 @@ public class RegistryEPTSPage extends Page{
     }
 
     public void userOpenUtilSborPage(){
-        click(getActionBtn);
-        wait.until(ExpectedConditions.presenceOfElementLocated(putDataIntoPassportContainerBtn));
-        Actions builder = new Actions(driver);
-        builder.moveToElement(driver.findElement(By.cssSelector("li[wicketpath=\"buttons_putDataIntoPassportContainer\"] button"))).perform();
-        wait.until(ExpectedConditions.elementToBeClickable(recyclingDutyLnk));
-        click(recyclingDutyLnk);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(changeEptsPageHeader));
+        int count=0;
+        while (count<5) {
+            try {
+                click(getActionBtn);
+                wait.until(ExpectedConditions.presenceOfElementLocated(putDataIntoPassportContainerBtn));
+                Actions builder = new Actions(driver);
+                builder.moveToElement(driver.findElement(By.cssSelector("li[wicketpath=\"buttons_putDataIntoPassportContainer\"] button"))).perform();
+                wait.until(ExpectedConditions.elementToBeClickable(recyclingDutyLnk));
+                click(recyclingDutyLnk);
+                wait2.until(ExpectedConditions.visibilityOfElementLocated(changeEptsPageHeader));
+                break;
+            } catch (Exception e) {
+                count = count + 1;
+            }
+        }
     }
 
     public void userSelectPaymentExecution(){
@@ -105,10 +113,18 @@ public class RegistryEPTSPage extends Page{
     }
 
     public void userOpenCreateRegistryRequestPage() {
-        click(getActionBtn);
-        wait.until(ExpectedConditions.elementToBeClickable(createRequestLnk));
-        click(createRequestLnk);
-        wait.until(ExpectedConditions.elementToBeClickable(createRequestLnk));
+        int count=0;
+        while (count<5){
+            try{
+                click(getActionBtn);
+                wait2.until(ExpectedConditions.elementToBeClickable(createRequestLnk));
+                click2(createRequestLnk);
+                wait2.until(ExpectedConditions.elementToBeClickable(createRequestBtn));
+                break;
+            } catch (Exception e){
+                count=count+1;
+            }
+        }
     }
 
     public void userCreateRegistryRequest(){

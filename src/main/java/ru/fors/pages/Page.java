@@ -71,6 +71,11 @@ public class Page {
 			}
 		}
 	}
+
+	public void click2(By element){
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		driver.findElement(element).click();
+	}
 	
 	public String getElementText(By element){
 		return driver.findElement(element).getText();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AcceptanceTests">
+	<parameter name="username" value="VBMEBV" />
+	<parameter name="password" value="12345678" />
+	<parameter name="role" value="ОАО Жигули" />
+	<test name = "CreateEPTSTests">
+		<classes>
+			<class name="ru.fors.tests.CreateOTTSTests">
+				<methods>
+					<exclude name="userCreateElectronicOTTSTest" />
+					<include name="userGenerateOTTSTest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

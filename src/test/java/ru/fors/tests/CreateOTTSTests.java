@@ -68,4 +68,16 @@ public class CreateOTTSTests extends TestBase{
         mainPage.userLogOut();
         Thread.sleep(5000);
     }
+    @Test
+    public void userGenerateOTTSTest() throws InterruptedException {
+        LoginPage lp = new LoginPage(driver);
+        MainPage mp = lp.userLogin("mega", "mega");
+        RegistryOTTSPage registryOTTSPage = mp.userGoToRegistryOTTSPage();
+        registryOTTSPage.userEraseStatusField();
+        registryOTTSPage.userTypeInOttsSearchForm();
+        registryOTTSPage.userClickSearchBtn();
+        registryOTTSPage.userClickSearchCheckBox();
+        CreateOTTSPage cop = registryOTTSPage.userCopyOTTS();
+        cop.userCopyOtts();
+    }
 }

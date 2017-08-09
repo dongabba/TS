@@ -66,6 +66,14 @@ public class CreateOTTSPage extends Page{
     private By manufacturerAssembliesSelect = By.cssSelector("div[wicketpath=\"form_manufacturerAssemblies_repeater_0_organization_organizationContainer\"]>div:nth-of-type(4)>div>div>span>span>span"); //сборочный завод
 
 
+    private By continueBtn = By.cssSelector("input[value=\"Продолжить\"]");
+    private By agreementBtn = By.cssSelector("button[wicketpath=\"form_toAgreement\"]");
+    private By agreeBtn = By.cssSelector("input[value=\"Подтвердить\"]");
+    private By agreeOttsBtn = By.name("agree");
+    private By approveBtn = By.cssSelector("button[wicketpath=\"form_approve\"]");
+    private By suspendBtn = By.cssSelector("button[wicketpath=\"form_suspend\"]");
+    private By copyBtn = By.cssSelector("button[wicketpath=\"form_copy\"]");
+
     @Step("Проверяем открылась ли страница создания ОТТС")
     public boolean isCreateOTTSPageOpen(){
         return ensurePageLoaded(docNumberFld);
@@ -201,7 +209,7 @@ public class CreateOTTSPage extends Page{
     @Step("Пользователь сохраняет ОТТС")
     public void userSaveOTTS(){
         click(saveButton);
-        wait.until(ExpectedConditions.elementToBeClickable(deleteButton));
+        wait.until(ExpectedConditions.elementToBeClickable(continueBtn));
     }
 
     @Step("Пользователь проверяет что статус ОТТС изменился на проект")
@@ -219,4 +227,53 @@ public class CreateOTTSPage extends Page{
     public void userTypevalidDateTo(){
         type(validDateToField, "31.12.2020");
     }
+
+    public void userTypeDocCopeNumb(int numb){
+        type(docNumberFld, "ТС RU Е-RU.НТ01.00"+ String.valueOf(numb+1));
+    }
+
+    public void userTypeCopyDate() {
+        type(dateRegistryEnter, "07.08.2017");
+    }
+
+    public void userClickContBtn(){
+        click(continueBtn);
+    }
+
+
+    public void userAgreeAndApproveOTTS() throws InterruptedException {
+        Thread.sleep(2000);
+        click(agreementBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(agreeBtn));
+        click(agreeBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(agreeOttsBtn));
+        click(agreeOttsBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(agreeBtn));
+        click(agreeBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(approveBtn));
+        click(approveBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(agreeBtn));
+        click(agreeBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(suspendBtn));
+    }
+
+    public void userClickCopyBtn(){
+        click(copyBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(docNumberFld));
+
+    }
+
+    public void userCopyOtts() throws InterruptedException {
+        int numb=125;
+        while (true){
+            userTypeDocCopeNumb(numb);
+            userTypeCopyDate();
+            userSaveOTTS();
+            userClickContBtn();
+            userAgreeAndApproveOTTS();
+            userClickCopyBtn();
+            numb=numb+1;
+        }
+    }
+
 }

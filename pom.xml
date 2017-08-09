@@ -129,6 +129,15 @@
 			</activation>
 		</profile>
 		<profile>
+			<id>otts</id>
+			<properties>
+				<site.url>${url}</site.url>
+				<imp.wait>${wait.seconds}</imp.wait>
+				<browser.name>chrome</browser.name>
+				<suites>copyOTTS</suites>
+			</properties>
+		</profile>
+		<profile>
 			<id>prod_chrome</id>
 			<properties>
 				<site.url>${url}</site.url>
